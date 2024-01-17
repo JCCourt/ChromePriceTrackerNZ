@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Slight of Cost",
+    "version": "1.0.0",
+    "description": "Easily view historical pricing data",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "webNavigation"
+    ],
+    "icons": {
+        "16": "images/logo.png",
+        "48": "images/logo.png",
+        "128": "images/logo.png"
+    },
+    "action": {
+        "default_popup": "Home.html",
+        "default_icon": {
+            "16": "images/logo.png",
+            "48": "images/logo.png",
+            "128": "images/logo.png"
+        }
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
