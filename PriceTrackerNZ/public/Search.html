@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <style>
+    /* Add any additional styles here */
+    .image-container {
+      width: 100px; /* Set width of image container */
+      height: 100px; /* Set height of image container */
+      overflow: hidden; /* Ensure images don't overflow container */
+    }
+    
+    .image-container img {
+      width: 100%; /* Ensure images fill the container */
+      height: auto; /* Maintain aspect ratio */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topnav">
+    <a href="Home.html">Home</a>
+    <a href="Search.html">Search</a>
+    <a href="Stores.html">Stores</a>
+    <a href="Mylist.html">My List</a>
+    <a href="About.html">About</a>
+  </div>
+
+  <div class="content">
+    <h1 style="text-align: center;">Search</h1>
+
+    <div id="loader-wrapper" style="display: none;">
+      <div id="loader"></div>
+    </div>
+    
+    <form id="myForm">
+      <label for="productNameBarcode">Product name / Barcode</label><br>
+      <input type="text" id="productNameBarcode" name="productNameBarcode" required> 
+      <button type="submit" id="submitButton">Submit</button><br><br>
+    </form>
+    
+    <h1>Search Results</h1>
+    <div id="searchResults" class="image-grid"></div>
+    <div id="imageContainer"></div>
+  
+    <script src="search.js"></script>
+    
+    <div class="footer">
+      <h3><u>Privacy Policy</u></h3>
+      <p>Price History doesn't support the stores if they are unavailable under the official shopping website.</p>
+      <p>Contact: </p>
+    </div>
+  </div>
+</body>
+</html>
