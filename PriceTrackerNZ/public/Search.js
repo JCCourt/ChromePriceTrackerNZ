@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loader.style.display = 'block'; // Show loader while fetching results
     console.log('Loader displayed'); // Log loader display
 
-    // Perform scraping with Puppeteer
+    console.log('Sending request to server with search query:', searchQuery);
     fetch(`/scrape?search=${encodeURIComponent(searchQuery)}`)
       .then(response => {
         console.log('Response received:', response); // Log the response received
@@ -21,76 +21,65 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(data => {
         console.log('Data received:', data); // Log the data received
         loader.style.display = 'none'; // Hide loader once results are fetched
-
+        
         searchResultsContainer.innerHTML = ''; // Clear previous results
-        console.log('Previous results cleared'); // Log clearing previous results
 
-        if (data.length === 0) {
-          // Display message indicating no results found
-          const noResultsMessage = document.createElement('p');
-          noResultsMessage.textContent = 'No results found.';
-          searchResultsContainer.appendChild(noResultsMessage);
-          console.log('No results found');
+        if (data.error) {
+          // Display error message
+          const errorMessage = document.createElement('p');
+          errorMessage.textContent = data.error;
+          searchResultsContainer.appendChild(errorMessage);
+          console.log('Error:', data.error);
         } else {
-          // Display the results as a table
-          const table = document.createElement('table');
-          table.style.borderCollapse = 'collapse'; // Collapse borders
-
-          // Create table header
-          const headerRow = document.createElement('tr');
-          const headerImage = document.createElement('th');
-          headerImage.textContent = 'Image';
-          const headerName = document.createElement('th');
-          headerName.textContent = 'Name';
-          const headerPrice = document.createElement('th');
-          headerPrice.textContent = 'Price';
-          headerRow.appendChild(headerImage);
-          headerRow.appendChild(headerName);
-          headerRow.appendChild(headerPrice);
-          table.appendChild(headerRow);
-
-          // Create table rows for each search result
-          data.forEach(item => {
+          // Display the results
+          data.forEach((item, index) => {
+            // Create a table row for each item
             const row = document.createElement('tr');
 
-            // Image column
+            // Logo column
+            const logoCell = document.createElement('td');
+            logoCell.style.border = '1px solid #ddd';
+            const logoImg = document.createElement('img');
+            logoImg.src = index === 0 ? './images/MightyApeLogo.png' : './images/jbhifiLogo.png';
+            logoImg.style.width = '50px';
+            logoImg.style.height = 'auto';
+            logoCell.appendChild(logoImg);
+            row.appendChild(logoCell);
+
+            // Product image column
             const imageCell = document.createElement('td');
-            imageCell.style.border = '1px solid #ddd'; // Add border
-            if (item.imageUrl) {
+            imageCell.style.border = '1px solid #ddd';
+            if (item.imgSrc) {
               const img = document.createElement('img');
-              img.src = item.imageUrl;
-              img.style.width = '50px'; // Set width of image
-              img.style.height = 'auto'; // Maintain aspect ratio
+              img.src = item.imgSrc;
+              img.style.width = '50px';
+              img.style.height = 'auto';
               imageCell.appendChild(img);
             } else {
               console.log('Image URL is not defined:', item);
             }
             row.appendChild(imageCell);
 
-            // Name column
+            // Product name column
             const nameCell = document.createElement('td');
             nameCell.textContent = item.title;
-            nameCell.style.border = '1px solid #ddd'; // Add border
+            nameCell.style.border = '1px solid #ddd';
             row.appendChild(nameCell);
 
             // Price column
             const priceCell = document.createElement('td');
             priceCell.textContent = item.price;
-            priceCell.style.border = '1px solid #ddd'; // Add border
+            priceCell.style.border = '1px solid #ddd';
             row.appendChild(priceCell);
 
-            // Append the row to the table
-            table.appendChild(row);
+            searchResultsContainer.appendChild(row);
           });
 
-          // Append the table to the container
-          searchResultsContainer.appendChild(table);
-
-          console.log('Results displayed:', data); // Log displayed results
+          console.log('Results displayed:', data);
         }
       })
       .catch(error => {
-        loader.style.display = 'none'; // Hide loader on error
+        loader.style.display = 'none';
         console.error('Error fetching search results:', error);
       });
   });
