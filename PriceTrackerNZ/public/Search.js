@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const logoCell = document.createElement('td');
             logoCell.style.border = '1px solid #ddd';
             const logoImg = document.createElement('img');
-            logoImg.src = index === 0 ? './images/MightyApeLogo.png' : index === 1 ? './images/jbhifiLogo.png' : './images/ComputerLoungeLogo.png';
+            logoImg.src = index === 0 ? './images/amazonau.jpg' :
+             index === 1 ? './images/MightyApeLogo.png' :
+             index === 2 ? './images/jbhifiLogo.png' : './images/ComputerLoungeLogo.png';           
             logoImg.style.width = '50px';
             logoImg.style.height = 'auto';
             logoCell.appendChild(logoImg);
@@ -68,7 +70,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Price column
             const priceCell = document.createElement('td');
-            priceCell.textContent = item.price;
+            if (index < 1) {
+              priceCell.textContent = item.roundedPrice;
+            } else {
+              priceCell.textContent = item.price;
+            }
             priceCell.style.border = '1px solid #ddd';
             row.appendChild(priceCell);
 
