@@ -1,15 +1,14 @@
 const puppeteer = require('puppeteer');
 
 async function scrapeJBHiFi(searchTerms) {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
   
-    console.log('Navigating to JB Hi-Fi search page...');
-    await page.goto(`https://www.jbhifi.co.nz/search?q=${encodeURIComponent(searchTerms)}`, { waitUntil: 'domcontentloaded' });
-  
     try {
+        console.log('Navigating to JB Hi-Fi search page...');
+        await page.goto(`https://www.jbhifi.co.nz/search?q=${encodeURIComponent(searchTerms)}`, { waitUntil: 'domcontentloaded' });
         console.log('JB Hi-Fi search page loaded successfully.');
-    
+        
         console.log('Entering search terms...');
         await page.type('#search-layover-container > div > div.search-container > div > div.search-bar > form > input', searchTerms);
         console.log('Search terms entered.');

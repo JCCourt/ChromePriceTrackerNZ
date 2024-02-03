@@ -12,7 +12,7 @@ async function scrapeMightyApe(searchTerms) {
     console.log('Search results loaded successfully.');
     
     const productElement = await page.$('.product-list .product');
-    console.log('Found 1 result.');
+    console.log('Found results.');
 
     // Extract search result details
     const result = await page.evaluate(product => {

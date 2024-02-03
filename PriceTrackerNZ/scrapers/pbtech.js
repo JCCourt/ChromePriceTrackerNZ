@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 async function scrapePBtech(searchTerms) {
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   try {
@@ -10,27 +10,25 @@ async function scrapePBtech(searchTerms) {
     console.log('PB Tech search page loaded successfully.');
 
     console.log('Waiting for product list container...');
-    await page.waitForXPath('/html/body/div[6]/div[2]/div[2]/div/div[2]');
+    await page.waitForSelector('.products-list-wrapper'); // Use a CSS selector instead of an XPath selector
     console.log('Product list container loaded.');
 
     console.log('Extracting data from the product list...');
     const data = await page.evaluate(() => {
-      const productElement = document.querySelector('.product-list-item a');
+      const products = Array.from(document.querySelectorAll('.product-list-item a')); // Select all the product elements
 
-      if (!productElement) {
-        return []; // Return an empty array if no product is found
-      }
+      return products.map(product => { // Loop over each product element
+        const title = product.querySelector('h2').textContent.trim(); // Get the product title
+        const imageUrl = product.querySelector('img').src; // Get the product image URL
 
-      const title = productElement.querySelector('h2').textContent.trim();
-      const imageUrl = productElement.querySelector('img').src;
-
-      return [{ title, imageUrl }]; // Return an array with information for the first product
+        return { title, imageUrl }; // Return an object with information for each product
+      });
     });
     console.log('Data extracted successfully.');
 
     await browser.close();
     console.log('Browser closed.');
-    console.log('---------------')
+    console.log('---------------');
 
     return data;
   } catch (error) {

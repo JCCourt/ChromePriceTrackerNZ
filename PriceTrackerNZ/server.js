@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const scrapeMightyApe = require('./scrapers/mightyape');
 const scrapeJBHiFi = require('./scrapers/jbhifi');
+const scrapeComputerLounge = require('./scrapers/computerlounge');
 
 const app = express();
 const port = 3001;
@@ -23,6 +24,7 @@ app.get('/scrape', async (req, res) => {
     console.log(`Received scraping request for: ${search}`);
     const mightyApeData = await scrapeMightyApe(search);
     const jbHiFiData = await scrapeJBHiFi(search);
+    const computerloungeData = await scrapeComputerLounge(search);
     
     const data = [];
     if (mightyApeData.length > 0) {
@@ -30,6 +32,9 @@ app.get('/scrape', async (req, res) => {
     }
     if (jbHiFiData.length > 0) {
       data.push(jbHiFiData[0]); // Add the first JB Hi-Fi result
+    }
+    if (computerloungeData.length > 0) {
+      data.push(computerloungeData[0]); // Add the first PlayTech result
     }
 
     res.json(data);

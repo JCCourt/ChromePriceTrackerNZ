@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const logoCell = document.createElement('td');
             logoCell.style.border = '1px solid #ddd';
             const logoImg = document.createElement('img');
-            logoImg.src = index === 0 ? './images/MightyApeLogo.png' : './images/jbhifiLogo.png';
+            logoImg.src = index === 0 ? './images/MightyApeLogo.png' : index === 1 ? './images/jbhifiLogo.png' : './images/ComputerLoungeLogo.png';
             logoImg.style.width = '50px';
             logoImg.style.height = 'auto';
             logoCell.appendChild(logoImg);
