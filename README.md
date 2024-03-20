@@ -1,6 +1,8 @@
 # Price Tracker
 ![image](https://github.com/JCCourt/ChromePriceTrackerNZ/assets/156492869/484b7d9e-3656-4b23-a02b-8616554cf450)
 
+* Note this is still in development and is not a finished product.
+
 Price Tracker is a web application that allows users to search for products across multiple online retailers and compare prices. It provides a convenient way to find the best deals on products by fetching and displaying prices from various sources.
 
 ## Features
@@ -17,12 +19,11 @@ Price Tracker is a web application that allows users to search for products acro
 - **Puppeteer:** Headless browser automation library for web scraping.
 - **HTML/CSS:** Frontend markup and styling.
 - **JavaScript:** Client-side scripting language.
-- **Markdown:** Lightweight markup language for documentation.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/your_username/price-tracker.git`
-2. Navigate to the project directory: `cd price-tracker`
+1. Clone the repository
+2. Navigate to the project directory
 3. Install dependencies: `npm install`
 4. Start the server: `npm start`
 
