@@ -29,7 +29,7 @@ Price Tracker is a web application that allows users to search for products acro
 
 ## Usage
 
-1. Access the application in your web browser at `http://localhost:3001`.
+1. Access the application in your web browser at `http://localhost:3000`.
 2. Enter the product name or barcode in the search bar and press Enter.
 3. View the search results, including product images, titles, and prices, from different retailers.
 4. Compare prices and select the best deal for your desired product.
